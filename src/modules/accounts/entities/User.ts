@@ -1,5 +1,12 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryColumn,
+} from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
+import { Task } from '../../tasks/entities/Task';
 
 @Entity('Users')
 class User {
@@ -17,6 +24,9 @@ class User {
 
   @CreateDateColumn()
   created_at: Date;
+
+  @OneToMany(() => Task, task => task.user)
+  task: Task[];
 
   constructor() {
     if (!this.id) {
