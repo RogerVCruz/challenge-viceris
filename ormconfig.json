@@ -1,8 +1,8 @@
 {
   "type": "sqlite",
-  "database": "./db.sqlite",
+  "database": ":memory:",
   "synchronize": true,
-  "logging": false,
+  "logging": true,
   "entities": [
     "./src/modules/**/entities/*.ts"
   ],
