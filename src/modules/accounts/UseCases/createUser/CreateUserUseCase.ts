@@ -20,7 +20,7 @@ class CreateUserUseCase {
       throw new AppError('User already exists!', 400);
     }
 
-    const passwordHash = await hash(password, process.env.SALT);
+    const passwordHash = await hash(password,  parseInt(process.env.SALT));
 
     await this.usersRepository.create({
       name,

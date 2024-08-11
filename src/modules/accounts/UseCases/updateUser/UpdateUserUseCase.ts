@@ -17,10 +17,10 @@ class UpdateUserUseCase {
       (await this.usersRepository.findByID(id)).email === email;
 
     if (!emailMatch) {
-      throw new AppError('Unauthorized email manipulation!', 401);
+      throw new AppError('Unauthorized email manipulation!', 400);
     }
 
-    const passwordHash = await hash(password, process.env.SALT);
+    const passwordHash = await hash(password, parseInt(process.env.SALT))
 
     await this.usersRepository.update(id, name, email, passwordHash);
   }
