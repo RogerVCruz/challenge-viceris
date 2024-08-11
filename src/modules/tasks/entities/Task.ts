@@ -14,6 +14,24 @@ export enum priorityOptions {
   'high',
 }
 
+export enum TaskStatus {
+  PENDING = 'pending',
+  DONE = 'done',
+  EMPTY = '',
+}
+
+export const taskStatusIsValid = (status: TaskStatus) => {
+  switch (status) {
+    case TaskStatus.EMPTY:
+    case TaskStatus.DONE:
+    case TaskStatus.PENDING:
+      return true;
+
+    default:
+      return false;
+  }
+};
+
 @Entity('Tasks')
 class Task {
   @PrimaryColumn()
@@ -25,8 +43,8 @@ class Task {
   @Column({ type: 'varchar', nullable: false })
   priority: priorityOptions;
 
-  @Column({ type: 'boolean', default: true })
-  pending: boolean;
+  @Column({ type: 'varchar', default: true })
+  status: TaskStatus;
 
   @CreateDateColumn()
   created_at: Date;
@@ -39,6 +57,10 @@ class Task {
   constructor() {
     if (!this.id) {
       this.id = uuidv4();
+    }
+
+    if (!this.status) {
+      this.status = TaskStatus.PENDING;
     }
   }
 }
