@@ -37,8 +37,8 @@ class UsersRepository implements IUsersRepository {
     );
   }
 
-  delete(id: string) {
-    this.repository.delete({ id });
+  async delete(id: string) {
+    await this.repository.delete({ id });
   }
 
   async listAll(): Promise<User[]> {
@@ -47,6 +47,7 @@ class UsersRepository implements IUsersRepository {
 
   async findByEmail(email: string): Promise<User> {
     const user = await this.repository.findOne({ email });
+
     return user;
   }
 

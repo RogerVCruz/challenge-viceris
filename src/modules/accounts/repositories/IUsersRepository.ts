@@ -4,7 +4,7 @@ import { User } from '../entities/User';
 
 interface IUsersRepository {
   create(data: ICreateUserDTO): Promise<void>;
-  delete(id: string);
+  delete(id: string): Promise<void>;
   update(
     id: string,
     name: string,
