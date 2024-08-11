@@ -27,9 +27,8 @@ export class CreateTasksTable1654896234567 implements MigrationInterface {
             isNullable: false,
           },
           {
-            name: 'pending',
-            type: 'boolean',
-            default: true,
+            name: 'status',
+            type: 'varchar',
           },
           {
             name: 'created_at',
