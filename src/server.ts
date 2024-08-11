@@ -1,11 +1,13 @@
-import express, { NextFunction, Request, Response } from 'express';
+import 'reflect-metadata';
 import 'dotenv/config';
+import express, { NextFunction, Request, Response } from 'express';
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import swaggerUi from 'swagger-ui-express';
 import swaggerFile from '../swagger.json';
 
 import './database';
+
 
 import 'express-async-errors';
 
