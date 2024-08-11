@@ -11,13 +11,6 @@ class CreateTaskController {
 
     const user_id = request.user.id;
 
-    if (!Object.values(priorityOptions).includes(priority)) {
-      throw new AppError(
-        'Invalid priority option! Choose: high, medium, low',
-        400,
-      );
-    }
-
     const createTaskUseCase = container.resolve(CreateTaskUseCase);
 
     await createTaskUseCase.execute({
