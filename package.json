@@ -5,7 +5,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts",
-    "typeorm": "ts-node-dev ./node_modules/typeorm/cli"
+    "typeorm": "ts-node-dev ./node_modules/typeorm/cli",
+    "build": "rimraf dist && tsc",
+    "start": "node ./dist/src/server.js"
   },
   "dependencies": {
     "@types/uuid": "^9.0.2",
