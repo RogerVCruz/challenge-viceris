@@ -1,7 +1,8 @@
 import { getRepository, Repository } from 'typeorm';
 import { ICreateTaskDTO } from '../../dtos/ICreateTaskDTO';
-import { Task } from '../../entities/Task';
+import { Task, TaskStatus } from '../../entities/Task';
 import { ITasksRepository } from '../ITasksRepository';
+import { AppError } from '../../../../shared/errors/AppError';
 
 class TasksRepository implements ITasksRepository {
   private repository: Repository<Task>;
@@ -21,7 +22,11 @@ class TasksRepository implements ITasksRepository {
       user: { id: user_id },
     });
 
-    console.log(await this.repository.save(task));
+    await this.repository.save(task);
+  }
+
+  async delete(id: string, user_id: string): Promise<void> {
+    await this.repository.delete({ id, user: { id: user_id } });
   }
 
   async findByID(id: string): Promise<Task> {
@@ -30,9 +35,13 @@ class TasksRepository implements ITasksRepository {
     return task;
   }
 
-  async listAll(user_id: string): Promise<Task[]> {
+  async listAll(user_id: string, status: TaskStatus): Promise<Task[]> {
+    if (!status) {
+      return this.repository.find({ where: { user: { id: user_id } } });
+    }
+
     const tasks = await this.repository.find({
-      where: { user: { id: user_id } },
+      where: { user: { id: user_id }, status },
     });
 
     return tasks;
@@ -47,10 +56,12 @@ class TasksRepository implements ITasksRepository {
     });
   }
 
-  async setPending(id: string, status: boolean): Promise<Task> {
+  async setStatus(id: string, status: TaskStatus): Promise<Task> {
     const task = await this.findByID(id);
 
-    task.pending = status;
+    if (!task) throw new AppError("Task doesn't exists!", 404);
+
+    task.status = status;
 
     const updatedTask = await this.repository.save({ ...task });
 
