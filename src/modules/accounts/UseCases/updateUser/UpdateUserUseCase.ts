@@ -20,7 +20,7 @@ class UpdateUserUseCase {
       throw new AppError('Unauthorized email manipulation!', 401);
     }
 
-    const passwordHash = await hash(password, 8);
+    const passwordHash = await hash(password, process.env.SALT);
 
     await this.usersRepository.update(id, name, email, passwordHash);
   }
