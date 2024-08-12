@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-import { SetStatusUseCase } from './UpdateTaskUseCase';
+import { UpdateTaskUseCase } from './UpdateTaskUseCase';
 import { priorityOptions, TaskStatus } from '../../entities/Task';
 
-class SetStatusController {
+class UpdateTaskController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
 
@@ -11,9 +11,9 @@ class SetStatusController {
     const priority: priorityOptions = request.body.priority.toLowerCase();
     const { description } = request.body;
 
-    const setStatusUseCase = container.resolve(SetStatusUseCase);
+    const updatedTaskUseCase = container.resolve(UpdateTaskUseCase);
 
-    const updatedTask = await setStatusUseCase.execute(
+    const updatedTask = await updatedTaskUseCase.execute(
       id,
       description,
       status,
@@ -24,4 +24,4 @@ class SetStatusController {
   }
 }
 
-export { SetStatusController };
+export { UpdateTaskController };
