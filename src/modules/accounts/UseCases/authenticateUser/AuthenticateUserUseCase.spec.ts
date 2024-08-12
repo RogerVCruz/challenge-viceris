@@ -3,6 +3,7 @@ import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';
 import { CreateUserUseCase } from '../createUser/CreateUserUseCase';
 import { AuthenticateUserUseCase } from './AuthenticateUserUseCase';
 import { hashSync } from 'bcryptjs';
+import { AppError } from '../../../../shared/errors/AppError';
 
 let authenticateUserUseCase: AuthenticateUserUseCase;
 
@@ -64,7 +65,7 @@ describe('Authenticate User', () => {
       password: user.password,
     });
 
-    expect(result).rejects.toThrow('Email or password incorrect!');
+    expect(result).rejects.toBeInstanceOf(AppError);
   });
 
   it('should not be able to authenticate an user with non existent email', async () => {
@@ -81,6 +82,6 @@ describe('Authenticate User', () => {
       password: user.password,
     });
 
-    expect(result).rejects.toThrow('Email or password incorrect!');
+    expect(result).rejects.toBeInstanceOf(AppError);
   });
 });

@@ -1,8 +1,10 @@
 import 'reflect-metadata';
+import 'dotenv/config';
 import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';
 import { CreateUserUseCase } from '../createUser/CreateUserUseCase';
 
 import { hashSync } from 'bcryptjs';
+import { AppError } from '../../../../shared/errors/AppError';
 
 let createUserUseCase: CreateUserUseCase;
 
@@ -19,6 +21,9 @@ const usersRepository = usersRepositoryMock();
 
 describe('Create User', () => {
   beforeAll(() => {
+    process.env.SECRET_TOKEN = 'dfdf';
+    process.env.SALT = '8';
+
     usersRepository.findByEmail.mockImplementation(() =>
       Promise.resolve({
         email: 'user@test.com',
@@ -38,6 +43,9 @@ describe('Create User', () => {
     };
 
     usersRepository.findByEmail.mockImplementationOnce(() => Promise.resolve());
+    usersRepository.create.mockImplementationOnce(() =>
+      Promise.resolve({ id: 'teste id', ...user }),
+    );
 
     const result = await createUserUseCase.execute({
       name: user.name,
@@ -45,7 +53,10 @@ describe('Create User', () => {
       password: user.password,
     });
 
-    expect(() => result).not.toThrow('User already exists!');
+    expect(usersRepository.create).toHaveBeenCalled();
+    expect(result).toHaveProperty('token');
+    expect(result.user.email).toEqual(user.email);
+    expect(result.user.name).toEqual(user.name);
   });
 
   it('should not be able to create an user', async () => {
@@ -61,6 +72,6 @@ describe('Create User', () => {
       password: user.password,
     });
 
-    expect(result).rejects.toThrow('User already exists!');
+    expect(result).rejects.toBeInstanceOf(AppError);
   });
 });

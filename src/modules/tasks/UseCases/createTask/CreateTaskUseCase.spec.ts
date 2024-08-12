@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { CreateTaskUseCase } from './CreateTaskUseCase';
 import { ICreateTaskDTO } from '../../dtos/ICreateTaskDTO';
-import { priorityOptions } from '../../entities/Task';
+import { priorityOptions, TaskStatus } from '../../entities/Task';
 import { AppError } from '../../../../shared/errors/AppError';
 
 let createTaskUseCase: CreateTaskUseCase;
@@ -13,6 +13,7 @@ const tasksRepositoryMock = () => ({
   delete: jest.fn(),
   listAll: jest.fn(),
   findByID: jest.fn(),
+  update: jest.fn(),
 });
 
 const tasksRepository = tasksRepositoryMock();
@@ -24,6 +25,7 @@ describe('Create Task', () => {
 
   it('should be able to create a Task', async () => {
     const task: ICreateTaskDTO = {
+      status: TaskStatus.DONE,
       description: 'Description test',
       priority: priorityOptions.medium,
       user_id: '1',
@@ -37,6 +39,7 @@ describe('Create Task', () => {
 
   it('should not be able to create a Task', async () => {
     const user: ICreateTaskDTO = {
+      status: TaskStatus.DONE,
       description: 'Description test',
       priority: priorityOptions.medium,
       user_id: '1',
@@ -44,8 +47,9 @@ describe('Create Task', () => {
 
     const result = createTaskUseCase.execute({
       description: user.description,
-      user_id: user.user_id,
       priority: 'wrong priority' as unknown as priorityOptions,
+      status: TaskStatus.DONE,
+      user_id: user.user_id,
     });
 
     expect(result).rejects.toBeInstanceOf(AppError);

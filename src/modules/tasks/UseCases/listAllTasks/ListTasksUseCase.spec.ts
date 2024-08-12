@@ -12,6 +12,7 @@ const tasksRepositoryMock = () => ({
   delete: jest.fn(),
   listAll: jest.fn(),
   findByID: jest.fn(),
+  update: jest.fn(),
 });
 
 const tasksRepository = tasksRepositoryMock();

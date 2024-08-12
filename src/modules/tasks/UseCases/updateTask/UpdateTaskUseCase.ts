@@ -10,7 +10,7 @@ import {
 import { AppError } from '../../../../shared/errors/AppError';
 
 @injectable()
-class SetStatusUseCase {
+class UpdateTaskUseCase {
   constructor(
     @inject('TasksRepository')
     private tasksRepository: ITasksRepository,
@@ -29,4 +29,4 @@ class SetStatusUseCase {
   }
 }
 
-export { SetStatusUseCase };
+export { UpdateTaskUseCase };

@@ -1,8 +1,8 @@
 # Viceri-SEIDOR Challenge
 
-## Description
+## Descrição
 
-Desafio Backend desenvolvido utilizando Typescript, NodeJS, Express and SQLITE.
+Desafio Backend desenvolvido utilizando Typescript, NodeJS, Express e SQLITE.
 
 ### Introdução
 
@@ -10,18 +10,22 @@ Implementei uma API REST para um aplicativo To-do List documentada através do S
 
 ### Melhorias
 
-- Auemtnar a cobertura dos testes.
+- Com mais tempo aumentaria a cobertura dos testes, especiamente na repository e seus métodos.
 - Aumentar o alcance das validações às rotas.
 
 ## Configuração do projeto
 
-Disponibilizei um arquivo .env.example que contém as variáveis de ambientes necessário para o funcionamento da aplicação, basta renomear para .env
+Disponibilizei um arquivo .env.example que contém as variáveis de ambientes necessário para o funcionamento da aplicação, basta renomear para `.env`
+
+É necessário instalar as dependências utilizando o comando:
+
+- `yarn`
 
 Para rodar a aplicação em desenvolvimento você pode utilizar o comando:
 
 - `yarn dev`
 
-Se tudo ocorrer bem o servidor está rodando na seguinte URL:
+Se tudo ocorrer bem o servidor estará rodando na seguinte URL:
 
 - `localhost:3000`.
 
@@ -35,7 +39,7 @@ Em seguida execute o comando:
 
 - `yarn start`
 
-Se tudo ocorrer bem o servidor está rodando na seguinte URL:
+Se tudo ocorrer bem o servidor estará rodando na seguinte URL:
 
 - `localhost:3000`.
 

@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { authenticateMiddleware } from '../shared/infra/http/authenticateMiddleware';
 import { CreateTaskController } from '../modules/tasks/UseCases/createTask/CreateTaskController';
-import { SetStatusController } from '../modules/tasks/UseCases/setStatus/UpdateTaskController';
+import { SetStatusController } from '../modules/tasks/UseCases/updateTask/UpdateTaskController';
 import { ListTasksController } from '../modules/tasks/UseCases/listAllTasks/ListTasksController';
 import { DeleteTaskController } from '../modules/tasks/UseCases/deleteTask/DeleteTaskController';
 
