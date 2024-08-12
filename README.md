@@ -1,23 +1,21 @@
 # Viceri-SEIDOR Challenge
 
-[[Docs](README.md) | [Challenge](README.pt.md)]
-
 ## Description
 
 Desafio Backend desenvolvido utilizando Typescript, NodeJS, Express and SQLITE.
 
-### My journey
+### Introdução
 
-Implementei uma API REST para um aplicativo To-do List. Pensei em uma abordagem usando UseCases, Controller e Repository. Concentrei as regas de negócio nos UseCases, já os Controllers são responsáveis cuidar das requisições HTTP e os Repository tem a responsabilidade de persistir e recuperar os dados.
+Implementei uma API REST para um aplicativo To-do List documentada através do Swagger. Pensei em uma abordagem usando UseCases, Controller e Repository. Concentrei as regas de negócio nos UseCases, já os Controllers são responsáveis cuidar das requisições HTTP e os Repository tem a responsabilidade de persistir e recuperar os dados.
 
-### Improvments
+### Melhorias
 
-- Implementar mais testes.
+- Auemtnar a cobertura dos testes.
 - Aumentar o alcance das validações às rotas.
 
 ## Configuração do projeto
 
-Disponibilizei um arquivo .env.example que contém as variáveis de ambientes necessário para o funcionamento da aplicação.
+Disponibilizei um arquivo .env.example que contém as variáveis de ambientes necessário para o funcionamento da aplicação, basta renomear para .env
 
 Para rodar a aplicação em desenvolvimento você pode utilizar o comando:
 
