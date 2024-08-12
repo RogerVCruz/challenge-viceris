@@ -26,7 +26,7 @@ tasksRoutes.delete(
   deleteTaskController.handle,
 );
 
-tasksRoutes.post(
+tasksRoutes.patch(
   '/update/:id',
   authenticateMiddleware,
   setStatusController.handle,
