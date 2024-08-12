@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { TaskStatus } from '../../entities/Task';
 import { AppError } from '../../../../shared/errors/AppError';
-import { SetStatusUseCase } from './SetStatusUseCase';
+import { SetStatusUseCase } from './UpdateTaskUseCase';
 
 let setStatusUseCase: SetStatusUseCase;
 

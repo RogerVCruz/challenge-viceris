@@ -1,6 +1,6 @@
 import { getRepository, Repository } from 'typeorm';
 import { ICreateTaskDTO } from '../../dtos/ICreateTaskDTO';
-import { Task, TaskStatus } from '../../entities/Task';
+import { priorityOptions, Task, TaskStatus } from '../../entities/Task';
 import { ITasksRepository } from '../ITasksRepository';
 import { AppError } from '../../../../shared/errors/AppError';
 
@@ -48,7 +48,7 @@ class TasksRepository implements ITasksRepository {
   }
 
   async listPending(user_id: string): Promise<Task[]> {
-    return await this.repository.find({
+    return this.repository.find({
       where: {
         user: { id: user_id },
         pending: true,
@@ -56,12 +56,19 @@ class TasksRepository implements ITasksRepository {
     });
   }
 
-  async setStatus(id: string, status: TaskStatus): Promise<Task> {
+  async update(
+    id: string,
+    description: string,
+    status: TaskStatus,
+    priority: priorityOptions,
+  ): Promise<Task> {
     const task = await this.findByID(id);
 
     if (!task) throw new AppError("Task doesn't exists!", 404);
 
+    task.description = description;
     task.status = status;
+    task.priority = priority;
 
     const updatedTask = await this.repository.save({ ...task });
 
