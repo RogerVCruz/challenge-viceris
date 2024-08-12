@@ -15,6 +15,7 @@ class CreateTaskUseCase {
   async execute({
     description,
     priority,
+    status,
     user_id,
   }: ICreateTaskDTO): Promise<Task> {
     if (!Object.values(priorityOptions).includes(priority)) {
@@ -27,6 +28,7 @@ class CreateTaskUseCase {
     return this.tasksRepository.create({
       description,
       priority,
+      status,
       user_id,
     });
   }

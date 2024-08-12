@@ -20,7 +20,7 @@ if (process.env.NODE_ENV !== 'development') {
 
 module.exports = {
   type: 'sqlite',
-  database: './db.sqlite',
+  database: ':memory:',
   synchronize: true,
   logging: false,
   entities: [paths.entities],
