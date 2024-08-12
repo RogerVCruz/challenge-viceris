@@ -26,6 +26,6 @@ tasksRoutes.delete(
   deleteTaskController.handle,
 );
 
-tasksRoutes.patch('/:id', authenticateMiddleware, setStatusController.handle);
+tasksRoutes.post('/u/:id', authenticateMiddleware, setStatusController.handle);
 
 export { tasksRoutes };

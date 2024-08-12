@@ -1,17 +1,16 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-
-import { AppError } from '../../../../shared/errors/AppError';
 import { TaskStatus } from '../../entities/Task';
 import { ListTasksUseCase } from './ListTasksUseCase';
 
 class ListTasksController {
   async handle(request: Request, response: Response): Promise<Response> {
-    let { status } = request.query;
+    let status = request.query.status;
 
-    if (!status) {
+    if (!status || typeof status !== 'string') {
       status = TaskStatus.EMPTY;
     }
+    status = status.toLowerCase();
 
     const user_id = request.user.id;
 

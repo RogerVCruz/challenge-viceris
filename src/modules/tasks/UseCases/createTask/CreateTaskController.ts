@@ -3,24 +3,23 @@ import { container } from 'tsyringe';
 
 import { CreateTaskUseCase } from './CreateTaskUseCase';
 
-
 class CreateTaskController {
   async handle(request: Request, response: Response): Promise<Response> {
     let { description, priority } = request.body;
 
     const user_id = request.user.id;
 
-    priority = priority.toLowerCase()
+    priority = priority.toLowerCase();
 
     const createTaskUseCase = container.resolve(CreateTaskUseCase);
 
-    await createTaskUseCase.execute({
+    const task = await createTaskUseCase.execute({
       description,
       priority,
       user_id,
     });
 
-    return response.sendStatus(201);
+    return response.send(task).status(201);
   }
 }
 

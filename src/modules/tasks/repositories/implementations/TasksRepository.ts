@@ -15,14 +15,14 @@ class TasksRepository implements ITasksRepository {
     description,
     priority,
     user_id,
-  }: ICreateTaskDTO): Promise<void> {
+  }: ICreateTaskDTO): Promise<Task> {
     const task = this.repository.create({
       description,
       priority,
       user: { id: user_id },
     });
 
-    await this.repository.save(task);
+    return await this.repository.save(task);
   }
 
   async delete(id: string, user_id: string): Promise<void> {

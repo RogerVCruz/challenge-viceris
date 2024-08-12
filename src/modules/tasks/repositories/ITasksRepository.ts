@@ -3,7 +3,7 @@ import { Task, TaskStatus } from '../entities/Task';
 import { ICreateTaskDTO } from '../dtos/ICreateTaskDTO';
 
 interface ITasksRepository {
-  create(data: ICreateTaskDTO): Promise<void>;
+  create(data: ICreateTaskDTO): Promise<Task>;
   listPending(user_id: string): Promise<Task[]>;
   setStatus(id: string, status: TaskStatus): Promise<Task>;
   delete(id: string, user_id: string);
